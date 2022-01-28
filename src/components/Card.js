@@ -1,12 +1,13 @@
 import React from 'react';
-import { Paper, Grid, Typography, Button, makeStyles} from '@material-ui/core/';
+import { Paper, Grid, Typography, makeStyles} from '@material-ui/core/';
 import { useSelector, useDispatch } from 'react-redux';
 import cartActions from './store/actions/cart';
-
+import ColorButton from './ColorButton'
 const useStyles = makeStyles((theme) => ({
     paper: {
       padding: theme.spacing(2),
-      textAlign: 'center'
+      textAlign: 'center',
+      boxShadow:'1px 1px 10px black',
     },
   }));
 
@@ -29,12 +30,12 @@ const Card = ({ product, children }) => {
                     </Typography>
                     </Grid>
                 
-                <Button 
+                <ColorButton 
                     variant="contained"
                     onClick={()=>dispatch(cartActions.Add(cart, product))}
                 >
                     Adicionar
-                </Button>
+                </ColorButton>
                 </Grid>
             </Paper>
         </Grid>

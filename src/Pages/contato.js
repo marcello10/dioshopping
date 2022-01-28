@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Grid, Button, TextField } from '@material-ui/core/';
-
+import { Grid, TextField } from '@material-ui/core/';
+import ColorButton from '../components/ColorButton';
 const Contatos = () => {
 
     const url = 'http://localhost:5000/message'
@@ -11,23 +11,27 @@ const Contatos = () => {
     const [render, setRender] = useState(false);
     const [success, setSuccess] = useState(false);
 
-    useEffect(async () => {
+    useEffect( () => {
+        async function fetchData(){
         const response = await fetch(url)
         const data = await response.json();
         setMessage(data);
+        }
+        fetchData();
     }, [render])
 
-    const sendMessage = () => {
+    const sendMessage =  async() => {
         setValidator(false);
         if(author.length <= 0 || content.length <= 0){
             return setValidator(!validator)
         }
+
         const bodyForm = {
             email: author,
             message: content,
         }
 
-        fetch(url, {
+        await fetch(url, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -54,8 +58,8 @@ const Contatos = () => {
     return(
         <>
             <Grid container direction="row" xs={12}>
-                <TextField id="name" label="Name" value={author} onChange={(event)=>{setAuthor(event.target.value)}} fullWidth/>
-                <TextField id="message" label="Message" value={content} onChange={(event)=>{setContent(event.target.value)}} fullWidth/>
+                <TextField id="name" label="Email" value={author} onChange={(event)=>{setAuthor(event.target.value)}} fullWidth/>
+                <TextField id="message" label="Mensagem" value={content} onChange={(event)=>{setContent(event.target.value)}} fullWidth/>
             </Grid>
 
             {validator && 
@@ -71,9 +75,9 @@ const Contatos = () => {
                 </div>
             }
 
-            <Button onClick={sendMessage} className="mt-2" variant="contained" color="primary">
+            <ColorButton onClick={sendMessage} className="mt-2" variant="contained" >
                 Sent
-            </Button>
+            </ColorButton>
 
             {message.map((content) => {
                 return(

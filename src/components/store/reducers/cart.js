@@ -25,6 +25,7 @@ export default function cart(state = INITIAL_STATE, action){
                         state.Cart[key].quantity++;
                         check = true;
                     }
+                    return state.Cart;
                 });
                 if (!check){
                     let item = {
@@ -70,5 +71,4 @@ export default function cart(state = INITIAL_STATE, action){
         default:
             return state;
     }
-    return state
 }

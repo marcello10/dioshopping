@@ -11,7 +11,8 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
       padding: theme.spacing(2),
-      textAlign: 'center'
+      textAlign: 'center',
+      boxShadow:'2px 3px 10px black',
     },
   }));
 
@@ -38,10 +39,8 @@ const HomePage = () => {
     let count = { };
 
     for(let i = 0; i < arrayCategory.length; i++){
-        {
             let key = arrayCategory[i];
             count[key] = (count[key] ? count[key] + 1 : 1)
-        }
     }
 
     return(
